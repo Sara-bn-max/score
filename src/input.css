@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@font-face {
+  font-family: Tanha;
+  src: url('../src/assets/fonts/Tanha.eot');
+  src: url('../src/assets/fonts/Tanha.eot?#iefix') format('FontName-opentype'),
+       url('../src/assets/fonts/Tanha.woff') format('woff'),
+       url('../src/assets/fonts/Tanha.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Tanha",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  direction: rtl;
+  font-size: 13px;
+}
+
+code {
+  font-family: "Tanha",
+}
