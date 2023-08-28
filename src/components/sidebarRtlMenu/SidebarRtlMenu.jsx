@@ -1,33 +1,31 @@
-import React from "react";
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
-import "./sidebarRtlMenuStyle.css";
+import React from 'react'
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
+import { AdjustmentsHorizontalIcon, Bars3Icon, ChartBarIcon, ClipboardDocumentCheckIcon, UsersIcon } from '@heroicons/react/24/solid'
 
-export default function SidebarRtlMenu() {
+export default function SidebarRtlMenu({collapsed}) {
   return (
-    <div className="sidebarMenu">
-      <Sidebar rtl="true">
-        <Menu
-          menuItemStyles={{
-            button: {
-              // the active class will be added automatically by react router
-              // so we can use it to style the active menu item
-              [`&.active`]: {
-                backgroundColor: "#13395e",
-                color: "#b6c8d9",
-              },
-            },
-          }}
-        >
-          <SubMenu  icon={<Icon name="bar-chart" />} label="Charts">
-            <MenuItem> منو </MenuItem>
-            <MenuItem> منو </MenuItem>
+    <div style={{ display: 'fix', height: '100vh', minHeight: '400px' }}>
+      <Sidebar rtl={true} collapsed={collapsed} transitionDuration={1000}>
+        <Menu>
+          <MenuItem icon={<ChartBarIcon className='h-6 w-6 text-primary' />}> داشبورد</MenuItem>
+          <SubMenu icon={<ClipboardDocumentCheckIcon className='h-6 w-6 text-primary' />} label="گزارشات">
+            <MenuItem> مربیان</MenuItem>
+            <MenuItem> باشگاه ها</MenuItem>
+            <MenuItem> سالن های ورزشی</MenuItem>
           </SubMenu>
-          <MenuItem icon={<Icon name="book-2" />}>Documentation</MenuItem>
-          <MenuItem icon={<Icon name="calendar" />}> Calendar</MenuItem>
-          <MenuItem icon={<Icon name="shopping-cart" />}> E-commerce</MenuItem>
-          <MenuItem icon={<Icon name="service" />}> Examples</MenuItem>
+          
+          <SubMenu icon={<UsersIcon className='h-6 w-6 text-primary' />} label="کاربران">
+            <MenuItem> ادمین های اصلی</MenuItem>
+            <MenuItem> تعریف کاربر</MenuItem>
+            <MenuItem> دسترسی ها</MenuItem>
+          </SubMenu>
+          
+          <SubMenu icon={<AdjustmentsHorizontalIcon className='h-6 w-6 text-primary' />} label="تنظیمات">
+            <MenuItem> تعریف وظایف</MenuItem>
+            <MenuItem> تنظیمات تم</MenuItem>
+          </SubMenu>
         </Menu>
       </Sidebar>
     </div>
-  );
+  )
 }
