@@ -2,6 +2,7 @@ import React from "react";
 import SidebarRtlMenu from "../../components/sidebarRtlMenu/SidebarRtlMenu";
 import Navbar from "../../components/navbar/Navbar";
 import { Bars3Icon } from "@heroicons/react/24/solid";
+import { Outlet } from "react-router-dom";
 
 export default function AdminLayout({children}) {
   const [collapsed, setCollapsed] = React.useState(true);
@@ -17,7 +18,7 @@ export default function AdminLayout({children}) {
           <div className=""><Navbar handleCollapseMenu={handleCollapseMenu}  /></div>
           <div className="pageContent">
             <main className="min-h-screen" style={{ padding: 10 }}>
-              {children}
+              <Outlet />
             </main>
           </div>
         </div>
