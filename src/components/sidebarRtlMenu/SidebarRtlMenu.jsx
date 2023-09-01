@@ -5,7 +5,7 @@ import { AdjustmentsHorizontalIcon, Bars3Icon, ChartBarIcon, ClipboardDocumentCh
 export default function SidebarRtlMenu({collapsed}) {
   return (
     <div style={{ display: 'fix', height: '100vh', minHeight: '400px' }}>
-      <Sidebar rtl={true} collapsed={collapsed} transitionDuration={1000}>
+      <Sidebar rtl={true} collapsed={collapsed} transitionDuration={1000} className='w-full h-full'>
         <Menu>
           <MenuItem icon={<ChartBarIcon className='h-6 w-6 text-primary' />}> داشبورد</MenuItem>
           <SubMenu icon={<ClipboardDocumentCheckIcon className='h-6 w-6 text-primary' />} label="گزارشات">

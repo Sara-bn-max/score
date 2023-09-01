@@ -3,27 +3,27 @@ import SidebarRtlMenu from "../../components/sidebarRtlMenu/SidebarRtlMenu";
 import Navbar from "../../components/navbar/Navbar";
 import { Bars3Icon } from "@heroicons/react/24/solid";
 
-export default function AdminLayout() {
+export default function AdminLayout({children}) {
   const [collapsed, setCollapsed] = React.useState(true);
-
+  const handleCollapseMenu = () =>{
+    setCollapsed(!collapsed)
+  }
   return (
     <div>
-      <div className="flex flex-row">
-        <SidebarRtlMenu collapsed={collapsed} />
-        <div className="mainPart">
-          <Navbar />
+      <div className="w-full overflow-hidden min-h-screen">
+      <div className="w-full flex flex-row">
+        <div className="sidebarmenu"><SidebarRtlMenu collapsed={collapsed} /></div>
+        <div className="mainPart w-full bg-gray-light">
+          <div className=""><Navbar handleCollapseMenu={handleCollapseMenu}  /></div>
           <div className="pageContent">
-            <main style={{ padding: 10 }}>
-              <div>
-                <Bars3Icon
-                  onClick={() => setCollapsed(!collapsed)}
-                  className="h-6 w-6 text-primary"
-                />
-              </div>
+            <main className="min-h-screen" style={{ padding: 10 }}>
+              {children}
             </main>
           </div>
         </div>
       </div>
+      </div>
+      
     </div>
   );
 }
