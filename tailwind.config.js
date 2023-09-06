@@ -18,10 +18,11 @@ module.exports = {
       'gray-dark': '#273444',
       'gray': '#8492a6',
       'gray-light': '#eeeeee',
+      'white':'#ffff',
     },
     fontFamily: {
-      sans: ['Tanha'],
-      serif: ['Tanha'],
+      sans: ['Iran'],
+      serif: ['Iran'],
     },
     extend: {
       spacing: {
