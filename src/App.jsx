@@ -7,6 +7,7 @@ import CateguryPage from "./pages/categuryPage/CateguryPage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import { AuthProvider } from "./contexts/authContext";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
+import StatePage from "./pages/states/StatePage";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             }
           >
             <Route index element={<CateguryPage />} />
+            <Route path="state" element={<StatePage />} />
           </Route>
           <Route path="/loginAdminPanel" element={<LoginPage />} />
         </Routes>
