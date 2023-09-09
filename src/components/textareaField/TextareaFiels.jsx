@@ -1,7 +1,8 @@
 import React from "react";
-import "./inputFieldStyle.css";
+import "../inputField/inputFieldStyle.css";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 
-export default function InputField({
+export default function TextareaField({
   disabled,
   type,
   inputName,
@@ -10,6 +11,7 @@ export default function InputField({
   placeholder,
   onChange,
   labelTxt,
+  autocomplete,
 }) {
   return (
     <div className="inputContainer">
@@ -18,8 +20,10 @@ export default function InputField({
           {labelTxt ? labelTxt : placeholder}
         </label>
       </div>
-      <input
-        className="sport-input"
+      <textarea
+        rows="3"
+        autocomplete={autocomplete}
+        className="sport-textArea"
         label={placeholder}
         placeholder={placeholder}
         type={type}

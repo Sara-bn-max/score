@@ -90,6 +90,9 @@ export default function DataTable({
   sortedCol,
   mainCurrentPage,
   mainItemsPerPage,
+  handleAdd,
+  handleEdit,
+  handleDel
 }) {
   const [info, setInfo] = useState(data && data);
   const [filteredData, setFilteredData] = useState(data);
@@ -226,10 +229,10 @@ export default function DataTable({
                   </td>
                 ))}
               <td className="text-center py-4">
-                <TrashIcon className="h-6 w-6 cursor-pointer text-secondary hover:text-primary mx-auto" />
+                <TrashIcon onClick={() => handleDel(row)} className="h-6 w-6 cursor-pointer text-secondary hover:text-primary mx-auto" />
               </td>
               <td className="text-center py-4">
-                <PencilSquareIcon className="h-6 w-6 cursor-pointer text-primary hover:text-secondary mx-auto" />
+                <PencilSquareIcon onClick={() => handleEdit(row)} className="h-6 w-6 cursor-pointer text-primary hover:text-secondary mx-auto" />
               </td>
             </tr>
           ))}
@@ -246,7 +249,7 @@ export default function DataTable({
               className=" cursor-text"
               handleSearchInput={(e) => handleSearchBox(e)}
             />
-            <Button variant="outlined">افزودن</Button>
+            <Button variant="outlined" onClick={handleAdd} >افزودن</Button>
           </div>
           <div className="datatable-style">{tableContent}</div>
           <div className="py-2">
