@@ -8,7 +8,7 @@ const Search = styled("div")(({ theme }) => ({
   borderRadius: theme.shape.borderRadius,
   backgroundColor: alpha(theme.palette.common.black, 0.05),
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.10),
+    backgroundColor: alpha(theme.palette.common.black, 0.1),
   },
   marginRight: 0,
   marginLeft: theme.spacing(2),
@@ -30,17 +30,17 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    color: "inherit",
-    "& .MuiInputBase-input": {
-      paddingRight: `calc(1em + ${theme.spacing(4)})`,
-      transition: theme.transitions.create("width"),
-      width: "100%",
-      [theme.breakpoints.up("md")]: {
-        width: "20ch",
-      },
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    paddingRight: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
     },
-  }));
-export default function SearchBox() {
+  },
+}));
+export default function SearchBox({handleSearchInput}) {
   return (
     <div>
       <Search>
@@ -48,9 +48,10 @@ export default function SearchBox() {
           <SearchIcon />
         </SearchIconWrapper>
         <StyledInputBase
-        className="font-sans"
+          className="font-sans"
           placeholder="جستجو ..."
           inputProps={{ "aria-label": "جستجو ..." }}
+          onChange={handleSearchInput}
         />
       </Search>
     </div>

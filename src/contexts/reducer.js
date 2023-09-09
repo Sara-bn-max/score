@@ -1,4 +1,4 @@
-import { useAuthDispatch } from "./auth-context"
+import { useAuthDispatch } from "./authContext"
 
 export const actionTypes = {
     LOGIN_REQUEST: 'LOGIN_REQUEST',
@@ -10,7 +10,6 @@ export const actionTypes = {
 export const initialState = {
     user: null,
     token: null,
-    setting: null,
     loading: false,
     error: null
 }
@@ -22,7 +21,6 @@ export function reducer(state, action) {
                 ...state,
                 user: null,
                 token: null,
-                setting: null,
                 loading: true,
                 error: null
             }
@@ -31,7 +29,6 @@ export function reducer(state, action) {
             return {
                 ...state,
                 user: user,
-                setting: setting,
                 token: token,
                 loading: false,
                 error: null
@@ -41,7 +38,6 @@ export function reducer(state, action) {
                 ...state,
                 user: null,
                 token: null,
-                setting: null,
                 loading: false,
                 error: action.payload.error
             }
@@ -50,7 +46,6 @@ export function reducer(state, action) {
                 ...state,
                 user: null,
                 token: null,
-                setting: null,
                 loading: false,
                 error: null
             }
@@ -77,7 +72,6 @@ export function useAuthActions() {
         payload: {
           user: user,
           token: token,
-          setting: setting,
         },
       });
     }
