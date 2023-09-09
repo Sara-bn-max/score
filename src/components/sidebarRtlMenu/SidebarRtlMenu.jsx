@@ -24,7 +24,8 @@ export default function SidebarRtlMenu({collapsed}) {
           <SubMenu icon={<AdjustmentsHorizontalIcon className='h-6 w-6 text-primary' />} label="تنظیمات">
             <MenuItem> تعریف وظایف</MenuItem>
             <MenuItem> تنظیمات تم</MenuItem>
-            <MenuItem> <Link to='/state'>مراکز استان</Link> </MenuItem>
+            <MenuItem> <Link to='/state'>استان ها</Link> </MenuItem>
+            <MenuItem> <Link to='/city'> شهر ها</Link> </MenuItem>
           </SubMenu>
         </Menu>
       </Sidebar>

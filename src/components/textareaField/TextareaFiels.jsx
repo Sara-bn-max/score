@@ -12,9 +12,10 @@ export default function TextareaField({
   onChange,
   labelTxt,
   autocomplete,
+  className
 }) {
   return (
-    <div className="inputContainer">
+    <div className={`inputContainer ${className}`}>
       <div className="flex flex-row">
         <label className="sport-label">
           {labelTxt ? labelTxt : placeholder}

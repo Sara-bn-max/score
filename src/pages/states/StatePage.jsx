@@ -172,7 +172,7 @@ export default function StatePage() {
     <div>
       <form onSubmit={submitAdd}>
         <PageTitle>افزودن استان</PageTitle>
-        <div className="mb-3">
+        <div className="mb-3 md:grid md:grid-cols-2  md:gap-3">
           <InputField
             className="mt-4 mb-2"
             type="text"
@@ -269,7 +269,7 @@ export default function StatePage() {
     <div>
       <form onSubmit={submitEdit}>
         <PageTitle>ویرایش استان </PageTitle>
-        <div className="mb-3">
+        <div className="mb-3  md:grid md:grid-cols-2 md:gap-3">
           <InputField
             className="mt-4 mb-2"
             type="text"

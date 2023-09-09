@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useLayoutEffect } from "react";
 import BreadCrumb from "../../components/breadCrumb/BreadCrumb";
 import PageTitle from "../../components/PageTitle/PageTitle";
@@ -11,7 +12,7 @@ import TextareaField from "../../components/textareaField/TextareaFiels";
 import ButtonFieldError from "../../components/buttonField/ButtonFieldError";
 import ButtonFieldSuccess from "../../components/buttonField/ButtonFieldSuccess";
 
-export default function CateguryPage() {
+export default function CityPage() {
   const [infos, setinfos] = useState(null);
   const [totalCount, setTotalCount] = useState(null);
   const [token, setToken] = useState(null);
@@ -41,7 +42,7 @@ export default function CateguryPage() {
 
   const fetchData = () => {
     if (token) {
-      let apiUrl = `/api/Administration/TrainingClassCategory/Get?PageSize=${pageSize}&PageIndex=${pageIndex}`;
+      let apiUrl = `api/State/Get?PageSize=${pageSize}&PageIndex=${pageIndex}`;
 
       if (sortedCol) {
         apiUrl += `&reverse=${order}`;
@@ -49,7 +50,7 @@ export default function CateguryPage() {
 
       if (searchText) {
         const searchColumn = className ? `&SearchColumn=${className}` : "";
-        apiUrl += `&title=${searchText}`;
+        apiUrl += `&stateTitle=${searchText}`;
       }
 
       get(apiUrl, token)
@@ -98,23 +99,28 @@ export default function CateguryPage() {
 
   let columns = [
     {
-      customKey: "title",
-      title: "عنوان",
+      customKey: "stateTitle",
+      title: "عنوان شهر",
     },
     {
-      customKey: "updateSubDate",
-      title: "تاریخ ایجاد",
+      customKey: "stateCountryTitle",
+      title: "کشور",
+    },
+    {
+      customKey: "stateTelephoneCode",
+      title: "پیش شماره",
+    },
+    {
+      customKey: "updateSubdate",
+      title: "تاریخ به روز رسانی",
     },
   ];
   ///add
   const [showAdd, setShowAdd] = useState(false);
   const [formData, setFormData] = useState({
-    title: "",
-    shortDescription: "",
-    imageAlt: "",
-    imageTitle: "",
-    metaDescription: "",
-    keyWords: "",
+    stateTitle: "",
+    stateTelephoneCode: "",
+    stateCountryId: "",
     id: "",
   });
   const [errors, setErrors] = useState({});
@@ -142,28 +148,22 @@ export default function CateguryPage() {
       setErrors(validationErrors);
     } else {
       // If there are no errors, submit the form
-      post(`/api/Administration/TrainingClassCategory/Create`, formData, token)
+      post(`/api/State/Create`, formData, token)
         .then((response) => {
           toast.success(response.description);
           setAdded(response.isSucceeded);
           setFormData({
-            title: "",
-            shortDescription: "",
-            imageAlt: "",
-            imageTitle: "",
-            metaDescription: "",
-            keyWords: "",
+            stateTitle: "",
+            stateTelephoneCode: "",
+            stateCountryId: 1,
           });
         })
         .catch((error) => {
           toast.error("عملیات با خطا مواجه شد");
           setFormData({
-            title: "",
-            shortDescription: "",
-            imageAlt: "",
-            imageTitle: "",
-            metaDescription: "",
-            keyWords: "",
+            stateTitle: "",
+            stateTelephoneCode: "",
+            stateCountryId: 1,
           });
         });
       setShowAdd(false);
@@ -172,101 +172,29 @@ export default function CateguryPage() {
   const modalBodyAdd = (
     <div>
       <form onSubmit={submitAdd}>
-        <PageTitle>افزودن دسته بندی</PageTitle>
-        <div className="mb-3 md:grid md:grid-cols-2 md:gap-3">
+        <PageTitle>افزودن شهر</PageTitle>
+        <div className="mb-3 md:grid md:grid-cols-2  md:gap-3">
           <InputField
             className="mt-4 mb-2"
             type="text"
-            inputName="title"
+            inputName="stateTitle"
             required="true"
-            value={formData.title}
-            placeholder="فوتبال"
+            value={formData.stateTitle}
+            placeholder="تهران"
             onChange={handleChange}
-            labelTxt="عنوان"
-          />
-          <InputField
-            className="mt-4 mb-2"
-            type="text"
-            inputName="imageAlt"
-            required="true"
-            value={formData.imageAlt}
-            placeholder="فوتبال"
-            onChange={handleChange}
-            labelTxt="متن تصویر"
+            labelTxt="نام شهر"
           />
           <InputField
             className="mt-4 mb-2"
             type="text"
-            inputName="imageTitle"
+            inputName="stateTelephoneCode"
             required="true"
-            value={formData.imageTitle}
-            placeholder="فوتبال"
+            value={formData.stateTelephoneCode}
+            placeholder="021"
             onChange={handleChange}
-            labelTxt="عنوان تصویر"
+            labelTxt="پیش شماره"
           />
-          <InputField
-            className="mt-4 mb-2"
-            type="text"
-            inputName="keyWords"
-            required="true"
-            value={formData.keyWords}
-            placeholder="فوتبال"
-            onChange={handleChange}
-            labelTxt="کلمات کلیدی "
-          />
-          <InputField
-            className="mt-4 mb-2"
-            type="text"
-            inputName="metaDescription"
-            required="true"
-            value={formData.metaDescription}
-            placeholder="فوتبال"
-            onChange={handleChange}
-            labelTxt="توضیحات متا"
-          />
-          <TextareaField
-            className="md:col-span-2"
-            type="text"
-            inputName="shortDescription"
-            required="true"
-            value={formData.shortDescription}
-            placeholder="ورزشی گروهی شامل 12 نفر .."
-            onChange={handleChange}
-            labelTxt="توضیحات تکمیلی"
-          />
-          {/* <label htmlFor="name" className="form-label">
-            Name
-          </label>
-          <input
-            type="text"
-            className={`form-control ${errors.name ? "is-invalid" : ""}`}
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          {errors.name && <div className="invalid-feedback">{errors.name}</div>} */}
         </div>
-
-        {/* <div className="mb-3">
-          <label htmlFor="email" className="form-label">
-            Email
-          </label>
-          <input
-            type="email"
-            className={`form-control ${errors.email ? "is-invalid" : ""}`}
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          {errors.email && (
-            <div className="invalid-feedback">{errors.email}</div>
-          )}
-        </div> */}
-
         <div className="flex flex-row">
           <ButtonFieldSuccess
             className="basis-1/2 mx-1"
@@ -279,12 +207,9 @@ export default function CateguryPage() {
             btnOnClick={() => {
               setShowAdd(false);
               setFormData({
-                title: "",
-                shortDescription: "",
-                imageAlt: "",
-                imageTitle: "",
-                metaDescription: "",
-                keyWords: "",
+                stateTitle: "",
+                stateTelephoneCode: "",
+                stateCountryId: 1,
               });
             }}
             btnType="button"
@@ -300,16 +225,14 @@ export default function CateguryPage() {
 
   const handleEdit = (data) => {
     get(
-      `/api/Administration/TrainingClassCategory/GetDetails/${data.id}`,
+      `/api/State/GetDetails/${data.id}`,
       token
     ).then((response) => {
       setFormData({
-        title: response.title,
-        shortDescription: response.shortDescription,
-        imageAlt: response.imageAlt,
-        imageTitle: response.imageTitle,
-        metaDescription: response.metaDescription,
-        keyWords: response.keyWords,
+        stateTitle: response.stateTitle,
+        stateTelephoneCode: response.stateTelephoneCode,
+        stateCountryId: 1,
+        id: data.id
       });
       setShowEdit(true);
       setEditedId(data.id);
@@ -318,7 +241,7 @@ export default function CateguryPage() {
   const submitEdit = (e) => {
     e.preventDefault();
     put(
-      `/api/Administration/TrainingClassCategory/Put/${editedId}`,
+      `/api/State/Edit`,
       formData,
       token
     )
@@ -326,25 +249,19 @@ export default function CateguryPage() {
         toast.success(response.description);
         setEdited(response.isSucceeded);
         setFormData({
-          title: "",
-          shortDescription: "",
-          imageAlt: "",
-          imageTitle: "",
-          metaDescription: "",
-          keyWords: "",
-          id: "",
+            stateTitle: "",
+            stateTelephoneCode: "",
+            stateCountryId: 1,
+            id: "",
         });
       })
       .catch((error) => {
         toast.error("عملیات با خطا مواجه شد");
         setFormData({
-          title: "",
-          shortDescription: "",
-          imageAlt: "",
-          imageTitle: "",
-          metaDescription: "",
-          keyWords: "",
-          id: "",
+            stateTitle: "",
+            stateTelephoneCode: "",
+            stateCountryId: 1,
+            id: "",
         });
       });
     setShowEdit(false);
@@ -352,67 +269,27 @@ export default function CateguryPage() {
   const modalBodyEdit = (
     <div>
       <form onSubmit={submitEdit}>
-        <PageTitle>ویرایش دسته بندی</PageTitle>
-        <div className="mb-3 md:grid md:grid-cols-2  md:gap-3">
+        <PageTitle>ویرایش شهر </PageTitle>
+        <div className="mb-3  md:grid md:grid-cols-2 md:gap-3">
           <InputField
             className="mt-4 mb-2"
             type="text"
-            inputName="title"
+            inputName="stateTitle"
             required="true"
-            value={formData.title}
-            placeholder="فوتبال"
+            value={formData.stateTitle}
+            placeholder="تهران"
             onChange={handleChange}
-            labelTxt="عنوان"
+            labelTxt="نام شهر"
           />
           <InputField
             className="mt-4 mb-2"
             type="text"
-            inputName="imageAlt"
+            inputName="stateTelephoneCode"
             required="true"
-            value={formData.imageAlt}
-            placeholder="فوتبال"
+            value={formData.stateTelephoneCode}
+            placeholder="021"
             onChange={handleChange}
-            labelTxt="متن تصویر"
-          />
-          <InputField
-            className="mt-4 mb-2"
-            type="text"
-            inputName="imageTitle"
-            required="true"
-            value={formData.imageTitle}
-            placeholder="فوتبال"
-            onChange={handleChange}
-            labelTxt="عنوان تصویر"
-          />
-          <InputField
-            className="mt-4 mb-2"
-            type="text"
-            inputName="keyWords"
-            required="true"
-            value={formData.keyWords}
-            placeholder="فوتبال"
-            onChange={handleChange}
-            labelTxt="کلمات کلیدی "
-          />
-          <InputField
-            className="mt-4 mb-2"
-            type="text"
-            inputName="metaDescription"
-            required="true"
-            value={formData.metaDescription}
-            placeholder="فوتبال"
-            onChange={handleChange}
-            labelTxt="توضیحات متا"
-          />
-          <TextareaField
-            className="md:col-span-2"
-            type="text"
-            inputName="shortDescription"
-            required="true"
-            value={formData.shortDescription}
-            placeholder="ورزشی گروهی شامل 12 نفر .."
-            onChange={handleChange}
-            labelTxt="توضیحات تکمیلی"
+            labelTxt="پیش شماره"
           />
         </div>
         <div className="flex flex-row">
@@ -451,7 +328,7 @@ export default function CateguryPage() {
 
   const submitDel = (e) => {
     e.preventDefault();
-    del(`/api/Administration/TrainingClassCategory/Delete/${delId}`)
+    del(`/api/State/Delete/${delId}`)
       .then((response) => {
         setDeleted(response.isSucceeded);
         toast.success(response.description);
@@ -464,8 +341,8 @@ export default function CateguryPage() {
   const modalBodyDel = (
     <div>
       <form onSubmit={submitDel}>
-        <PageTitle>حذف دسته بندی</PageTitle>
-        <div className="mb-3">آیا از حذف این دسته اطمینان دارید؟؟</div>
+        <PageTitle>حذف شهر</PageTitle>
+        <div className="mb-3">آیا از حذف این شهر اطمینان دارید؟؟</div>
         <div className="flex flex-row">
           <ButtonFieldSuccess
             className="basis-1/2 mx-1"
@@ -486,10 +363,10 @@ export default function CateguryPage() {
     <div>
       <div className="flex flex-row w-full justify-between">
         <div>
-          <PageTitle>دسته بندی</PageTitle>
+          <PageTitle>شهر ها </PageTitle>
           <BreadCrumb>
             <p>پنل مدیران</p>
-            <p>دسته بندی ها</p>
+            <p>شهر ها</p>
           </BreadCrumb>
         </div>
       </div>

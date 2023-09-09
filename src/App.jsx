@@ -8,6 +8,7 @@ import LoginPage from "./pages/loginPage/LoginPage";
 import { AuthProvider } from "./contexts/authContext";
 import PrivateRoute from "./components/privateRoute/PrivateRoute";
 import StatePage from "./pages/states/StatePage";
+import CityPage from "./pages/cityPage/CityPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           >
             <Route index element={<CateguryPage />} />
             <Route path="state" element={<StatePage />} />
+            <Route path="city" element={<CityPage />} />
           </Route>
           <Route path="/loginAdminPanel" element={<LoginPage />} />
         </Routes>
